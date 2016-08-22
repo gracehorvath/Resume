@@ -1,0 +1,172 @@
+.row.cols-1 .col {
+  width: 100%; }
+
+.row.cols-2 .col {
+  width: 50%; }
+
+.row.cols-3 .col {
+  width: 33.33333%; }
+
+.row.cols-4 .col {
+  width: 25%; }
+
+.row.cols-5 .col {
+  width: 20%; }
+
+.row.cols-6 .col {
+  width: 16.66667%; }
+
+.row.cols-7 .col {
+  width: 14.28571%; }
+
+.row.cols-8 .col {
+  width: 12.5%; }
+
+.row.cols-9 .col {
+  width: 11.11111%; }
+
+.row.cols-10 .col {
+  width: 10%; }
+
+.row.cols-11 .col {
+  width: 9.09091%; }
+
+.row.cols-12 .col {
+  width: 8.33333%; }
+
+@media all and (max-width: 850px) {
+  .row.cols-850-1 .col {
+    width: 100%; }
+
+  .row.cols-850-2 .col {
+    width: 50%; }
+
+  .row.cols-850-3 .col {
+    width: 33.33333%; }
+
+  .row.cols-850-4 .col {
+    width: 25%; }
+
+  .row.cols-850-5 .col {
+    width: 20%; }
+
+  .row.cols-850-6 .col {
+    width: 16.66667%; }
+
+  .row.cols-850-7 .col {
+    width: 14.28571%; }
+
+  .row.cols-850-8 .col {
+    width: 12.5%; }
+
+  .row.cols-850-9 .col {
+    width: 11.11111%; }
+
+  .row.cols-850-10 .col {
+    width: 10%; }
+
+  .row.cols-850-11 .col {
+    width: 9.09091%; }
+
+  .row.cols-850-12 .col {
+    width: 8.33333%; } }
+@media all and (max-width: 450px) {
+  .row.cols-450-1 .col {
+    width: 100%; }
+
+  .row.cols-450-2 .col {
+    width: 50%; }
+
+  .row.cols-450-3 .col {
+    width: 33.33333%; }
+
+  .row.cols-450-4 .col {
+    width: 25%; }
+
+  .row.cols-450-5 .col {
+    width: 20%; }
+
+  .row.cols-450-6 .col {
+    width: 16.66667%; } }
+@media all and (max-width: 380px) {
+  .row.cols-380-1 .col {
+    width: 100%; }
+
+  .row.cols-380-2 .col {
+    width: 50%; }
+
+  .row.cols-380-3 .col {
+    width: 33.33333%; } }
+.row.fill-1 {
+  height: 10%; }
+
+.row.fill-2 {
+  height: 20%; }
+
+.row.fill-3 {
+  height: 30%; }
+
+.row.fill-4 {
+  height: 40%; }
+
+.row.fill-5 {
+  height: 50%; }
+
+.row.fill-6 {
+  height: 60%; }
+
+.row.fill-7 {
+  height: 70%; }
+
+.row.fill-8 {
+  height: 80%; }
+
+.row.fill-9 {
+  height: 90%; }
+
+.row.fill-10 {
+  height: 100%; }
+
+.row {
+  position: relative;
+  width: 100%;
+  margin: 0 auto; }
+  .row .col {
+    height: 100%;
+    background: #ccc;
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+    float: left; }
+
+#home,
+#home .row,
+#home .row .col {
+  height: 100vh; }
+
+#about {
+  height: 100vh; }
+
+.heading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid white;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px; }
+  .heading p {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -25px; }
+    .heading p span {
+      background-color: #ccc;
+      padding-left: 8px;
+      padding-right: 8px; }
+
+img {
+  max-height: 100%;
+  max-width: 100%; }
+
+/*# sourceMappingURL=Style.css.map */

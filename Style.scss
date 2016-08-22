@@ -1,0 +1,96 @@
+/////////////////GRID SETUP///////////////////////
+//full page col width
+@for $i from 1 through 12 {
+    $equ: 100%/$i;
+    .row.cols-#{$i} .col {
+        width: $equ;
+    }
+}
+
+//break points and a guestimate of how many col iterations we need for each; assumes that at breakpoint x there will not be more than x cols
+$map: (850:12, 450:6, 380:3);
+//iterates through each breakpoint
+@each $breakPoint,
+$cols in $map {
+    //creates a media query for the breakpoint
+    @media all and (max-width: $breakPoint + px) {
+        //iterates through the cols in the curr breakpoint and sets the width
+        @for $i from 1 through $cols {
+            $equ: 100%/$i;
+            //sets the width for each div based on the breakpoint and specified col amount
+            .row.cols-#{$breakPoint}-#{$i} .col {
+                width: $equ;
+            }
+        }
+    }
+}
+
+//sets row height to specified 'fill' percentage
+@for $i from 1 through 10 {
+    $equ: 10%*$i;
+    .row.fill-#{$i} {
+        height: $equ;
+    }
+}
+.row {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    .col {
+        height:100%;
+        background: #ccc;
+        border: 1px solid #aaa;
+        box-sizing: border-box;
+        float: left;
+    }
+}
+/////////////////////END GRID SETUP//////////////////
+@mixin center($x, $y) {
+    position: absolute;
+    @if ($x and $y) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    @else if ($x) {
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    @else if ($y) {
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+}
+
+#home,
+#home .row,
+#home .row .col {
+    height: 100vh;
+}
+
+#about {
+    height: 100vh;
+}
+
+.heading {
+    @include center(true, true);
+    border: 1px solid white;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    p {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -25px;
+        span {
+            background-color: #ccc;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+    }
+}
+img{
+    max-height: 100%;
+    max-width: 100%;
+}
