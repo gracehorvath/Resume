@@ -14,10 +14,10 @@ $map: (850:12, 450:6, 380:3);
 $cols in $map {
     //creates a media query for the breakpoint
     @media all and (max-width: $breakPoint + px) {
-        //iterates through the cols in the curr breakpoint and sets the width
+        //iterates through the cols in the curr breakpoint
         @for $i from 1 through $cols {
             $equ: 100%/$i;
-            //sets the width for each div based on the breakpoint and specified col amount
+            //sets the width for each col based on the breakpoint and specified col amount
             .row.cols-#{$breakPoint}-#{$i} .col {
                 width: $equ;
             }
@@ -37,6 +37,8 @@ $cols in $map {
     width: 100%;
     margin: 0 auto;
     .col {
+        padding: 0 25px 0 25px;
+        position:relative;
         height:100%;
         background: #ccc;
         border: 1px solid #aaa;
@@ -45,6 +47,8 @@ $cols in $map {
     }
 }
 /////////////////////END GRID SETUP//////////////////
+
+/////////////////////MIXINS/////////////////////////
 @mixin center($x, $y) {
     position: absolute;
     @if ($x and $y) {
@@ -61,17 +65,71 @@ $cols in $map {
         transform: translate(0, -50%);
     }
 }
+///////////////////END MIXINS/////////////////////
 
-#home,
-#home .row,
-#home .row .col {
-    height: 100vh;
+///////////////////BUTTONS///////////////////////
+.button{
+    display:inline-block;
+    text-decoration:none;
+    font-family:"helvetica";
+    font-size:14px;
+    font-weight:200;
+    background-color:#ccc;
+    color:#222;
+    padding: 10px 15px;
+    border:none;
+    border-radius:3px;
+    transition: all .2s;
+}
+.button:hover{
+    background:#bbb;
+    transition: all .2s;
 }
 
-#about {
-    height: 100vh;
+//dummy color data for test
+$colormap:(
+    green:(background: #86c351, hover:#78b04a),
+    blue:(background: #00b3e0, hover:#0097be),
+    red:(background: #ff5817, hover:#da4912)
+);
+
+@each $color, $map in $colormap{
+    .button.#{$color}{
+       background-color: map-get($map, 'background');
+    }
+    .button.#{$color}:hover{
+        background-color:map-get($map, 'hover');
+    }
+}
+///////////////////END BUTTONS//////////////////
+
+.center{
+    @include center(true, true);
+}
+.center-vertical{
+    @include center(false, true);
+}
+.center-horizontal{
+    @include center(true, false);
+}
+section{
+    height:100vh;
+    background-color: #ccc;
+    &.content{
+        padding: 0 10% 0 10%;
+    }
 }
 
+//changing content padding for breakpoints
+$map: (850:5%, 450:0);
+@each $breakPoint,
+$padd in $map {
+    @media all and (max-width: $breakPoint + px) {
+        section.content{
+            padding: 0 $padd 0 $padd
+        }
+    }
+}
 .heading {
     @include center(true, true);
     border: 1px solid white;
@@ -90,6 +148,8 @@ $cols in $map {
         }
     }
 }
+
+p{word-wrap: break-word;}
 img{
     max-height: 100%;
     max-width: 100%;
