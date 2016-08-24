@@ -25,29 +25,25 @@ $cols in $map {
     }
 }
 
-//sets row height to specified 'fill' percentage
-@for $i from 1 through 10 {
-    $equ: 10%*$i;
-    .row.fill-#{$i} {
-        height: $equ;
-    }
-}
 .row {
     position: relative;
     width: 100%;
     margin: 0 auto;
+    @media all {
+        display: flex;
+    }
+    padding:10px 0;
     .col {
         padding: 0 25px 0 25px;
-        position:relative;
-        height:100%;
+        position: relative;
         background: #ccc;
         border: 1px solid #aaa;
         box-sizing: border-box;
         float: left;
     }
 }
-/////////////////////END GRID SETUP//////////////////
 
+/////////////////////END GRID SETUP//////////////////
 /////////////////////MIXINS/////////////////////////
 @mixin center($x, $y) {
     position: absolute;
@@ -65,57 +61,53 @@ $cols in $map {
         transform: translate(0, -50%);
     }
 }
-///////////////////END MIXINS/////////////////////
 
+///////////////////END MIXINS/////////////////////
 ///////////////////BUTTONS///////////////////////
-.button{
-    display:inline-block;
-    text-decoration:none;
-    font-family:"helvetica";
-    font-size:14px;
-    font-weight:200;
-    background-color:#ccc;
-    color:#222;
+.button {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #ccc;
+    color: #222;
     padding: 10px 15px;
-    border:none;
-    border-radius:3px;
+    border: none;
+    border-radius: 3px;
     transition: all .2s;
 }
-.button:hover{
-    background:#bbb;
+
+.button:hover {
+    background: #bbb;
     transition: all .2s;
 }
 
 //dummy color data for test
-$colormap:(
-    green:(background: #86c351, hover:#78b04a),
-    blue:(background: #00b3e0, hover:#0097be),
-    red:(background: #ff5817, hover:#da4912)
-);
-
-@each $color, $map in $colormap{
-    .button.#{$color}{
-       background-color: map-get($map, 'background');
+$colormap:( green:(background: #86c351, hover:#78b04a), blue:(background: #00b3e0, hover:#0097be), red:(background: #ff5817, hover:#da4912));
+@each $color,
+$map in $colormap {
+    .button.#{$color} {
+        background-color: map-get($map, 'background');
     }
-    .button.#{$color}:hover{
-        background-color:map-get($map, 'hover');
+    .button.#{$color}:hover {
+        background-color: map-get($map, 'hover');
     }
 }
-///////////////////END BUTTONS//////////////////
 
-.center{
+///////////////////END BUTTONS//////////////////
+.center {
     @include center(true, true);
 }
-.center-vertical{
+
+.center-vertical {
     @include center(false, true);
 }
-.center-horizontal{
+
+.center-horizontal {
     @include center(true, false);
 }
-section{
-    height:100vh;
+
+section {
     background-color: #ccc;
-    &.content{
+    &.content {
         padding: 0 10% 0 10%;
     }
 }
@@ -125,17 +117,22 @@ $map: (850:5%, 450:0);
 @each $breakPoint,
 $padd in $map {
     @media all and (max-width: $breakPoint + px) {
-        section.content{
+        section.content {
             padding: 0 $padd 0 $padd
         }
     }
 }
+
 .heading {
-    @include center(true, true);
+    position: relative;
+    display: inline-block;
     border: 1px solid white;
     text-align: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    h1 {
+        padding: 15px;
+        line-height: 53px;
+        margin: 0;
+    }
     p {
         position: absolute;
         left: 0;
@@ -149,8 +146,52 @@ $padd in $map {
     }
 }
 
-p{word-wrap: break-word;}
-img{
+#home {
+    height: 100vh;
+    @media all {
+        display: flex;
+        align-items: center;
+    }
+}
+
+p {
+    word-wrap: break-word;
+}
+
+img {
     max-height: 100%;
     max-width: 100%;
+}
+
+.jobs::before {
+    content: '';
+    height: 90%;
+    background: #00b3e0;
+    position: absolute;
+    left: 50%;
+    width: 5px;
+}
+
+.job {
+    width: 50%;
+    &:nth-child(even) {
+        float: left;
+        clear: right;
+    }
+    &:nth-child(odd) {
+        float: right;
+        clear: left;
+    }
+    &:hover {
+        @media all {
+            box-shadow: 2px 3px 10px grey, -2px -4px 7px grey;
+            transition: .5s;
+        }
+    }
+    &:before {
+        content: '⬢';
+        position: absolute;
+        left: 50%;
+        margin-left: -5px;
+    }
 }

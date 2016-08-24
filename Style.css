@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .row.cols-1 .col {
   width: 100%; }
 
@@ -97,44 +98,17 @@
 
   .row.cols-380-3 .col {
     width: 33.33333%; } }
-.row.fill-1 {
-  height: 10%; }
-
-.row.fill-2 {
-  height: 20%; }
-
-.row.fill-3 {
-  height: 30%; }
-
-.row.fill-4 {
-  height: 40%; }
-
-.row.fill-5 {
-  height: 50%; }
-
-.row.fill-6 {
-  height: 60%; }
-
-.row.fill-7 {
-  height: 70%; }
-
-.row.fill-8 {
-  height: 80%; }
-
-.row.fill-9 {
-  height: 90%; }
-
-.row.fill-10 {
-  height: 100%; }
-
 .row {
   position: relative;
   width: 100%;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding: 10px 0; }
+  @media all {
+    .row {
+      display: flex; } }
   .row .col {
     padding: 0 25px 0 25px;
     position: relative;
-    height: 100%;
     background: #ccc;
     border: 1px solid #aaa;
     box-sizing: border-box;
@@ -143,9 +117,6 @@
 .button {
   display: inline-block;
   text-decoration: none;
-  font-family: "helvetica";
-  font-size: 14px;
-  font-weight: 200;
   background-color: #ccc;
   color: #222;
   padding: 10px 15px;
@@ -192,7 +163,6 @@
   transform: translate(-50%, 0); }
 
 section {
-  height: 100vh;
   background-color: #ccc; }
   section.content {
     padding: 0 10% 0 10%; }
@@ -204,14 +174,14 @@ section {
   section.content {
     padding: 0 0 0 0; } }
 .heading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  display: inline-block;
   border: 1px solid white;
-  text-align: center;
-  padding-left: 10px;
-  padding-right: 10px; }
+  text-align: center; }
+  .heading h1 {
+    padding: 15px;
+    line-height: 53px;
+    margin: 0; }
   .heading p {
     position: absolute;
     left: 0;
@@ -222,11 +192,44 @@ section {
       padding-left: 8px;
       padding-right: 8px; }
 
+#home {
+  height: 100vh; }
+  @media all {
+    #home {
+      display: flex;
+      align-items: center; } }
+
 p {
   word-wrap: break-word; }
 
 img {
   max-height: 100%;
   max-width: 100%; }
+
+.jobs::before {
+  content: '';
+  height: 90%;
+  background: #00b3e0;
+  position: absolute;
+  left: 50%;
+  width: 5px; }
+
+.job {
+  width: 50%; }
+  .job:nth-child(even) {
+    float: left;
+    clear: right; }
+  .job:nth-child(odd) {
+    float: right;
+    clear: left; }
+  @media all {
+    .job:hover {
+      box-shadow: 2px 3px 10px grey, -2px -4px 7px grey;
+      transition: .5s; } }
+  .job:before {
+    content: '⬢';
+    position: absolute;
+    left: 50%;
+    margin-left: -5px; }
 
 /*# sourceMappingURL=Style.css.map */
