@@ -1,197 +1,330 @@
-/////////////////GRID SETUP///////////////////////
-//full page col width
-@for $i from 1 through 12 {
-    $equ: 100%/$i;
-    .row.cols-#{$i} .col {
-        width: $equ;
+    ///////////////////////GRID SETUP///////////////////////
+    //full page col width
+    @for $i from 1 through 12 {
+        $equ: 100%/$i;
+        .row.cols-#{$i} .col {
+            width: $equ;
+        }
     }
-}
-
-//break points and a guestimate of how many col iterations we need for each; assumes that at breakpoint x there will not be more than x cols
-$map: (850:12, 450:6, 380:3);
-//iterates through each breakpoint
-@each $breakPoint,
-$cols in $map {
-    //creates a media query for the breakpoint
-    @media all and (max-width: $breakPoint + px) {
-        //iterates through the cols in the curr breakpoint
-        @for $i from 1 through $cols {
-            $equ: 100%/$i;
-            //sets the width for each col based on the breakpoint and specified col amount
-            .row.cols-#{$breakPoint}-#{$i} .col {
-                width: $equ;
+    
+    //break points and a guestimate of how many col iterations we need for each; assumes that at breakpoint x there will not be more than x cols
+    $map: (850:12, 650:6, 380:3);
+    //iterates through each breakpoint
+    @each $breakPoint,
+    $cols in $map {
+        //creates a media query for the breakpoint
+        @media all and (max-width: $breakPoint + px) {
+            //iterates through the cols in the curr breakpoint
+            @for $i from 1 through $cols {
+                $equ: 100%/$i;
+                //sets the width for each col based on the breakpoint and specified col amount
+                .row.cols-#{$breakPoint}-#{$i} .col {
+                    width: $equ;
+                }
             }
         }
     }
-}
-
-.row {
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    @media all {
-        display: flex;
-    }
-    padding:10px 0;
-    .col {
-        padding: 0 25px 0 25px;
+    
+    .row {
         position: relative;
-        background: #ccc;
-        border: 1px solid #aaa;
-        box-sizing: border-box;
-        float: left;
-    }
-}
-
-/////////////////////END GRID SETUP//////////////////
-/////////////////////MIXINS/////////////////////////
-@mixin center($x, $y) {
-    position: absolute;
-    @if ($x and $y) {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-    @else if ($x) {
-        left: 50%;
-        transform: translate(-50%, 0);
-    }
-    @else if ($y) {
-        top: 50%;
-        transform: translate(0, -50%);
-    }
-}
-
-///////////////////END MIXINS/////////////////////
-///////////////////BUTTONS///////////////////////
-.button {
-    display: inline-block;
-    text-decoration: none;
-    background-color: #ccc;
-    color: #222;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 3px;
-    transition: all .2s;
-}
-
-.button:hover {
-    background: #bbb;
-    transition: all .2s;
-}
-
-//dummy color data for test
-$colormap:( green:(background: #86c351, hover:#78b04a), blue:(background: #00b3e0, hover:#0097be), red:(background: #ff5817, hover:#da4912));
-@each $color,
-$map in $colormap {
-    .button.#{$color} {
-        background-color: map-get($map, 'background');
-    }
-    .button.#{$color}:hover {
-        background-color: map-get($map, 'hover');
-    }
-}
-
-///////////////////END BUTTONS//////////////////
-.center {
-    @include center(true, true);
-}
-
-.center-vertical {
-    @include center(false, true);
-}
-
-.center-horizontal {
-    @include center(true, false);
-}
-
-section {
-    background-color: #ccc;
-    &.content {
-        padding: 0 10% 0 10%;
-    }
-}
-
-//changing content padding for breakpoints
-$map: (850:5%, 450:0);
-@each $breakPoint,
-$padd in $map {
-    @media all and (max-width: $breakPoint + px) {
-        section.content {
-            padding: 0 $padd 0 $padd
+        width: 100%;
+        margin: 0 auto;
+        padding: 10px 0;
+        display: inline-block;
+        .col {
+            padding: 0 25px 0 25px;
+            position: relative;
+            box-sizing: border-box;
+            float: left;
         }
     }
-}
-
-.heading {
-    position: relative;
-    display: inline-block;
-    border: 1px solid white;
-    text-align: center;
-    h1 {
-        padding: 15px;
-        line-height: 53px;
+    
+    /////////////////////////END GRID SETUP//////////////////
+    //////////////////////////MIXINS/////////////////////////
+    @mixin center($x, $y) {
+        position: absolute;
+        @if ($x and $y) {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        @else if ($x) {
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+        @else if ($y) {
+            top: 50%;
+            transform: translate(0, -50%);
+        }
+    }
+    
+    @mixin heading($backgroundColor, $opacity, $borderSize, $color, $textSize) {
+        .heading {
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            display: inline-block;
+            background-color: rgba($backgroundColor, $opacity);
+            border: $borderSize solid $color;
+            color: $color;
+            h1 {
+                font-size: $textSize;
+                margin: 0;
+            }
+            p {
+                font-size: $textSize*.5;
+                margin: 0;
+            }
+        }
+    }
+    
+    ///////////////////////////END MIXINS/////////////////////
+    /////////////////////////////BUTTONS///////////////////////
+    .button {
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+        background-color: #ccc;
+        color: #222;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 3px;
+        transition: all .2s;
+    }
+    
+    .button:hover {
+        background: #bbb;
+        transition: all .2s;
+    }
+    
+    //dummy color data for test
+    $colormap:( green:(background: #86c351, hover:#78b04a), blue:(background: #00b3e0, hover:#0097be), red:(background: #ff5817, hover:#da4912));
+    @each $color,
+    $map in $colormap {
+        .button.#{$color} {
+            background-color: map-get($map, 'background');
+        }
+        .button.#{$color}:hover {
+            background-color: map-get($map, 'hover');
+        }
+    }
+    
+    /////////////////////////END BUTTONS//////////////////////
+    //////////////////////////GENERAL/////////////////////////
+    //color palette
+    $purple: #332233;
+    $brown: #886666;
+    $blue: #DDEEEE;
+    $tan: #DDBB99;
+    html {
+        font-family: sans-serif;
+        font-weight: 300;
+        h1 {
+            font-weight: 400;
+        }
+        h2 {
+            font-weight: 300;
+        }
+    }
+    
+    body {
         margin: 0;
     }
+    
+    .center {
+        @include center(true, true);
+    }
+    
+    .center-vertical {
+        @include center(false, true);
+    }
+    
+    .center-horizontal {
+        @include center(true, false);
+    }
+    
+    section {
+        background-color: #ccc;
+        &.content {
+            padding: 0 10% 0 10%;
+        }
+    }
+    
+    //changing content padding for breakpoints
+    $map: (850:5%, 450:0);
+    @each $breakPoint,
+    $padd in $map {
+        @media all and (max-width: $breakPoint + px) {
+            section.content {
+                padding: 0 $padd 0 $padd
+            }
+        }
+    }
+    
+    @include heading($tan, .8, 2px, white, 200%);
     p {
+        word-wrap: break-word;
+    }
+    
+    img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+    
+    ////////////////////////END GENERAL/////////////////////////
+    ////////////////////////NAVIGATION/////////////////////////
+    #nav {
+        width: 100%;
         position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -25px;
-        span {
-            background-color: #ccc;
-            padding-left: 8px;
-            padding-right: 8px;
+        background-color: red;
+        text-align: center;
+        z-index: 100;
+        top: 100%;
+        color: white;
+        img {
+            cursor: pointer;
+            display: none;
+            float: right;
+        }
+        @media all and (max-width: 650px) {
+            img {
+                display: block;
+            }
+        }
+        @media all and (max-width:650px) {
+            .off {
+                display: none;
+            }
+            .on {
+                display: auto;
+            }
         }
     }
-}
-
-#home {
-    height: 100vh;
-    @media all {
-        display: flex;
-        align-items: center;
-    }
-}
-
-p {
-    word-wrap: break-word;
-}
-
-img {
-    max-height: 100%;
-    max-width: 100%;
-}
-
-.jobs::before {
-    content: '';
-    height: 90%;
-    background: #00b3e0;
-    position: absolute;
-    left: 50%;
-    width: 5px;
-}
-
-.job {
-    width: 50%;
-    &:nth-child(even) {
-        float: left;
-        clear: right;
-    }
-    &:nth-child(odd) {
-        float: right;
-        clear: left;
-    }
-    &:hover {
+    
+    //////////////////////END NAVIGATION///////////////////////
+    #home {
+        height: 100vh;
+        background: url(background.jpeg);
+        &:before {
+            content: '';
+            height: 100%;
+            background-color: white;
+            width: 100%;
+            opacity: 0.3;
+            position: absolute;
+        }
+        background-size: cover;
         @media all {
-            box-shadow: 2px 3px 10px grey, -2px -4px 7px grey;
-            transition: .5s;
+            display: flex;
+            align-items: center;
+        }
+        @include heading(#DDBB99, .8, 2px, white, 250%);
+        .down {
+            position: absolute;
+            left: 50%;
+            top: 100%;
         }
     }
-    &:before {
-        content: '⬢';
-        position: absolute;
-        left: 50%;
-        margin-left: -5px;
+    
+    //////////////////////////EXPERIENCE///////////////////////   
+    .jobs {
+        &:before {
+            content: '';
+            height: 90%;
+            background: #00b3e0;
+            position: absolute;
+            left: 50%;
+            width: 5px;
+        }
+        .job {
+            width: 50%;
+            & > * {
+                margin: 10px;
+            }
+            &:nth-child(even) {
+                float: left;
+                clear: right;
+                margin-left: -15px;
+            }
+            &:nth-child(odd) {
+                float: right;
+                clear: left;
+                margin-right: -15px;
+            }
+            &:hover {
+                @media all {
+                    box-shadow: 2px 3px 10px grey, -2px -4px 7px grey;
+                    transition: .5s;
+                }
+            }
+            &:before {
+                content: '⬢';
+                position: absolute;
+                left: 50%;
+                margin-left: -5px;
+            }
+        }
+        @media all and (max-width: 850px) {
+            &:before {
+                left: 0;
+            }
+            .job {
+                width: 100%;
+                &:nth-child(odd),
+                &:nth-child(even) {
+                    float: left;
+                    margin: 0 15px;
+                }
+                &:before {
+                    left: 0;
+                }
+            }
+        }
     }
-}
+    
+    /////////////////////////////END EXPERIENCE/////////////////////
+    ///////////////////////////EDUCATION/////////////////////////////
+    .tabs {
+        @media all and (min-width: 850px) {
+            .tab-button {
+                margin: 10px 0;
+                display: block;
+                width: 10%;
+            }
+            .tab-content {
+                position: absolute;
+                margin-left: 10%;
+                top: 0;
+                width: 80%;
+                padding: 20px;
+            }
+        }
+        .tab-button {
+            cursor: pointer;
+            text-align: center;
+            border: solid 1px black;
+            span {
+                font-size: 30px;
+                font-weight: 100;
+            }
+        }
+        .tab-content {
+            display: none;
+            &.active {
+                display: block;
+            }
+        }
+    }
+    
+    //////////////////////////END EDUCATION//////////////////////////
+    ////////////////////////////CONTACT//////////////////////////////
+    #contact {
+        .col {
+            text-align: center;
+        }
+        span {
+            display: block;
+        }
+    }
+    
+    ///////////////////////////END CONTACT////////////////////////
