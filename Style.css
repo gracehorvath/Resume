@@ -89,14 +89,14 @@
 
   .row.cols-650-6 .col {
     width: 16.66667%; } }
-@media all and (max-width: 380px) {
-  .row.cols-380-1 .col {
+@media all and (max-width: 450px) {
+  .row.cols-450-1 .col {
     width: 100%; }
 
-  .row.cols-380-2 .col {
+  .row.cols-450-2 .col {
     width: 50%; }
 
-  .row.cols-380-3 .col {
+  .row.cols-450-3 .col {
     width: 33.33333%; } }
 .row {
   position: relative;
@@ -144,12 +144,20 @@
   background-color: #da4912; }
 
 html {
+  scroll-behavior: smooth;
   font-family: sans-serif;
   font-weight: 300; }
-  html h1 {
-    font-weight: 400; }
-  html h2 {
-    font-weight: 300; }
+
+h1 {
+  font-weight: 400; }
+
+h2 {
+  font-weight: 300; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer; }
 
 body {
   margin: 0; }
@@ -182,6 +190,7 @@ section {
   section.content {
     padding: 0 0 0 0; } }
 .heading {
+  margin-top: 5%;
   text-align: center;
   padding: 15px;
   position: relative;
@@ -206,23 +215,45 @@ img {
 #nav {
   width: 100%;
   position: absolute;
-  background-color: red;
+  background-color: #886666;
   text-align: center;
   z-index: 100;
   top: 100%;
-  color: white; }
+  color: white;
+  box-shadow: 0 0 6px rgba(51, 34, 51, 0.7); }
+  #nav #nav-accrd {
+    margin: 0 15%;
+    width: 70%;
+    padding: 0; }
+    #nav #nav-accrd span {
+      width: 100%;
+      cursor: pointer;
+      padding: 15px 10px;
+      display: inline-block; }
+      #nav #nav-accrd span:hover {
+        color: #332233; }
+      #nav #nav-accrd span.active {
+        transition: background-color 0.5s ease;
+        background-color: rgba(51, 34, 51, 0.6); }
   #nav img {
     cursor: pointer;
     display: none;
     float: right; }
   @media all and (max-width: 650px) {
-    #nav img {
-      display: block; } }
-  @media all and (max-width: 650px) {
+    #nav #nav-accrd {
+      width: 100%;
+      margin: 0; }
+      #nav #nav-accrd span {
+        transform: none;
+        width: 100%; }
+      #nav #nav-accrd .col {
+        padding: 0; }
     #nav .off {
       display: none; }
     #nav .on {
-      display: auto; } }
+      display: auto; }
+    #nav img {
+      display: block; } }
 
 #home {
   height: 100vh;
@@ -240,6 +271,7 @@ img {
       display: flex;
       align-items: center; } }
   #home .heading {
+    margin-top: 5%;
     text-align: center;
     padding: 15px;
     position: relative;

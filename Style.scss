@@ -8,7 +8,7 @@
     }
     
     //break points and a guestimate of how many col iterations we need for each; assumes that at breakpoint x there will not be more than x cols
-    $map: (850:12, 650:6, 380:3);
+    $map: (850:12, 650:6, 450:3);
     //iterates through each breakpoint
     @each $breakPoint,
     $cols in $map {
@@ -60,6 +60,7 @@
     
     @mixin heading($backgroundColor, $opacity, $borderSize, $color, $textSize) {
         .heading {
+            margin-top: 5%;
             text-align: center;
             padding: 15px;
             position: relative;
@@ -117,14 +118,23 @@
     $blue: #DDEEEE;
     $tan: #DDBB99;
     html {
+        scroll-behavior: smooth;
         font-family: sans-serif;
         font-weight: 300;
-        h1 {
-            font-weight: 400;
-        }
-        h2 {
-            font-weight: 300;
-        }
+    }
+    
+    h1 {
+        font-weight: 400;
+    }
+    
+    h2 {
+        font-weight: 300;
+    }
+    
+    a {
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
     }
     
     body {
@@ -176,27 +186,55 @@
     #nav {
         width: 100%;
         position: absolute;
-        background-color: red;
+        background-color: $brown;
         text-align: center;
         z-index: 100;
         top: 100%;
         color: white;
+        box-shadow: 0 0 6px rgba($purple, 0.7);
+        #nav-accrd {
+            margin: 0 15%;
+            width: 70%;
+            padding: 0;
+            span {
+                width:100%;
+                &:hover {
+                    color: $purple;
+                }
+                cursor:pointer;
+                padding: 15px 10px;
+                display: inline-block;
+                &.active {
+                    transition: background-color 0.5s ease;
+                    background-color: rgba($purple, 0.6);
+                }
+            }
+        }
         img {
             cursor: pointer;
             display: none;
             float: right;
         }
-        @media all and (max-width: 650px) {
-            img {
-                display: block;
-            }
-        }
         @media all and (max-width:650px) {
+            #nav-accrd {
+                width: 100%;
+                margin: 0;
+                span {
+                    transform: none;
+                    width: 100%;
+                }
+                .col {
+                    padding: 0;
+                }
+            }
             .off {
                 display: none;
             }
             .on {
                 display: auto;
+            }
+            img {
+                display: block;
             }
         }
     }
