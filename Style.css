@@ -245,7 +245,11 @@ button:hover {
   #nav img {
     cursor: pointer;
     display: none;
-    float: right; }
+    float: right; 
+          border: 1px solid white;
+    padding: 7px;
+    margin: 10px;
+}
   @media all and (max-width: 850px) {
     #nav #nav-accrd {
       width: 100%;
@@ -264,7 +268,7 @@ button:hover {
 
 #home {
   height: 100vh;
-  background: url(background.jpeg);
+  background: url(images/background.jpeg);
   background-size: cover; }
   #home:before {
     content: '';
@@ -323,6 +327,13 @@ button:hover {
     border-top: solid 3px #DDBB33;
     box-shadow: 0 0 6px rgba(221, 187, 153, 0.5);
     width: 50%; }
+    #experience .jobs .job p{
+        font-size:12px;
+        line-height:1.35em;
+    }
+    #experience .jobs .job span{
+        font-size:14px;
+    }
     #experience .jobs .job h2 {
       display: inline-block; }
       @media all {
@@ -393,7 +404,7 @@ button:hover {
         .tabs .tab-content .col {
           padding: 0 10px; } }
   .tabs .tab .row {
-      
+      display:block;
     padding: 0; }
   .tabs .tab .tab-button {
     cursor: pointer;
@@ -412,7 +423,7 @@ button:hover {
     visibility: hidden; 
     }
     .tabs .tab .tab-content .col {
-      height: 90%;
+     height:90%;
       padding: 0; }
       .tabs .tab .tab-content .col:not(:last-child) {
         border-right: 1px solid #782E37; }
@@ -450,7 +461,7 @@ button:hover {
     text-align: center;
     background-color: rgba(160, 108, 115, 0.4);
     color: #782E37;
-    height: 12%;
+    height: 15%;
     padding: 5px; }
   .tabs .tab .header-box .info p {
     margin: 0;
@@ -471,6 +482,9 @@ button:hover {
     .tabs .tab-button {
       border-radius: 0;
       border-bottom: 1px solid #782E37; }
+      .tabs .tab .row{
+          display:inline-block;
+      }
     .tabs .tab .degree {
       background-color: white; }
     .tabs .tab .header-box .name {
@@ -520,9 +534,15 @@ height:70vh;
   #contact .col {
     text-align: center; }
   #contact span {
+      padding-top:8px;
     display: block; }
 .contact-img{
-    margin:20%;
+    margin:20% 0;
+}
+@media all and (max-width: 650px) {
+    .contact-img{
+        margin:5% 0;
+    }
 }
 
 
