@@ -57,8 +57,11 @@ var scrollTimer;
 
 function scroll(secSpan) {
 
-    var secName = secSpan.parentElement;
-    var sec = document.getElementById(secName.classList[1]);
+    var secNameEle = secSpan.parentElement;
+    
+    var secName = (secNameEle.classList.length>1) ? secNameEle.classList[1] : secNameEle.classList[0];
+    var sec = document.getElementById(secName);
+    console.log(sec);
     var increment;
     var navHeight = document.getElementById("nav").offsetHeight;
 
@@ -76,7 +79,7 @@ function scroll(secSpan) {
 function scrolling(sec, increment, navHeight) {
     var windowY = window.scrollY;
     window.scrollTo(sec.offsetLeft, windowY + increment);
-    if ((window.scrollY + window.innerHeight == document.body.offsetHeight) || (window.scrollY == 0) || (increment > 0 && windowY >= (sec.offsetTop - navHeight)) || (increment < 0 && windowY <= (sec.offsetTop - navHeight))) {
+    if ((window.scrollY + window.innerHeight == document.body.offsetHeight) || (window.scrollY == 0) || (increment > 0 && windowY >= (sec.offsetTop)) || (increment < 0 && windowY <= (sec.offsetTop))) {
         window.clearInterval(scrollTimer)
     }
 }

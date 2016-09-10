@@ -1,281 +1,395 @@
-    ///////////////////////GRID SETUP///////////////////////
-    //full page col width
-    @for $i from 1 through 12 {
-        $equ: 100%/$i;
-        .row.cols-#{$i} .col {
-            width: $equ;
-        }
+///////////////////////GRID SETUP///////////////////////
+//full page col width
+@for $i from 1 through 12 {
+    $equ: 100%/$i;
+    .row.cols-#{$i} .col {
+        width: $equ;
     }
-    
-    //break points and a guestimate of how many col iterations we need for each; assumes that at breakpoint x there will not be more than x cols
-    $map: (850:12, 650:6, 450:3);
-    //iterates through each breakpoint
-    @each $breakPoint,
-    $cols in $map {
-        //creates a media query for the breakpoint
-        @media all and (max-width: $breakPoint + px) {
-            //iterates through the cols in the curr breakpoint
-            @for $i from 1 through $cols {
-                $equ: 100%/$i;
-                //sets the width for each col based on the breakpoint and specified col amount
-                .row.cols-#{$breakPoint}-#{$i} .col {
-                    width: $equ;
-                }
+}
+
+//break points and a guestimate of how many col iterations we need for each; assumes that at breakpoint x there will not be more than x cols
+$map: (850:12, 650:6, 450:3);
+//iterates through each breakpoint
+@each $breakPoint,
+$cols in $map {
+    //creates a media query for the breakpoint
+    @media all and (max-width: $breakPoint + px) {
+        //iterates through the cols in the curr breakpoint
+        @for $i from 1 through $cols {
+            $equ: 100%/$i;
+            //sets the width for each col based on the breakpoint and specified col amount
+            .row.cols-#{$breakPoint}-#{$i} .col {
+                width: $equ;
             }
         }
     }
-    
-    .row {
+}
+
+.row {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 0;
+    display: inline-block;
+    .col {
+        padding: 0 25px 0 25px;
         position: relative;
-        width: 100%;
-        margin: 0 auto;
-        padding: 10px 0;
-        display: inline-block;
-        .col {
-            padding: 0 25px 0 25px;
-            position: relative;
-            box-sizing: border-box;
-            float: left;
-        }
+        box-sizing: border-box;
+        float: left;
     }
-    
-    /////////////////////////END GRID SETUP//////////////////
-    //////////////////////////MIXINS/////////////////////////
-    @mixin center($x, $y) {
-        position: absolute;
-        @if ($x and $y) {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        @else if ($x) {
-            left: 50%;
-            transform: translate(-50%, 0);
-        }
-        @else if ($y) {
-            top: 50%;
-            transform: translate(0, -50%);
-        }
+}
+
+/////////////////////////END GRID SETUP//////////////////
+//////////////////////////MIXINS/////////////////////////
+@mixin center($x, $y) {
+    position: absolute;
+    @if ($x and $y) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
-    
-    @mixin heading($backgroundColor, $opacity, $borderSize, $color, $textSize) {
-        .heading {
-            margin-top: 5%;
-            text-align: center;
-            padding: 15px;
-            position: relative;
-            display: inline-block;
-            background-color: rgba($backgroundColor, $opacity);
-            border: $borderSize solid $color;
-            color: $color;
-            h1 {
-                font-size: $textSize;
-                margin: 0;
-            }
-            p {
-                font-size: $textSize*.5;
-                margin: 0;
-            }
-        }
+    @else if ($x) {
+        left: 50%;
+        transform: translate(-50%, 0);
     }
-    
-    ///////////////////////////END MIXINS/////////////////////
-    /////////////////////////////BUTTONS///////////////////////
-    .button {
-        cursor: pointer;
-        display: inline-block;
-        text-decoration: none;
-        background-color: #ccc;
-        color: #222;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 3px;
-        transition: all .2s;
+    @else if ($y) {
+        top: 50%;
+        transform: translate(0, -50%);
     }
-    
-    .button:hover {
-        background: #bbb;
-        transition: all .2s;
-    }
-    
-    //dummy color data for test
-    $colormap:( green:(background: #86c351, hover:#78b04a), blue:(background: #00b3e0, hover:#0097be), red:(background: #ff5817, hover:#da4912));
-    @each $color,
-    $map in $colormap {
-        .button.#{$color} {
-            background-color: map-get($map, 'background');
-        }
-        .button.#{$color}:hover {
-            background-color: map-get($map, 'hover');
-        }
-    }
-    
-    /////////////////////////END BUTTONS//////////////////////
-    //////////////////////////GENERAL/////////////////////////
-    //color palette
-    $purple: #332233;
-    $brown: #886666;
-    $blue: #DDEEEE;
-    $tan: #DDBB99;
-    html {
-        scroll-behavior: smooth;
-        font-family: sans-serif;
-        font-weight: 300;
-    }
-    
-    h1 {
-        font-weight: 400;
-    }
-    
-    h2 {
-        font-weight: 300;
-    }
-    
-    a {
-        color: inherit;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    
-    body {
-        margin: 0;
-    }
-    
-    .center {
-        @include center(true, true);
-    }
-    
-    .center-vertical {
-        @include center(false, true);
-    }
-    
-    .center-horizontal {
-        @include center(true, false);
-    }
-    
-    section {
-        background-color: #ccc;
-        &.content {
-            padding: 0 10% 0 10%;
-        }
-    }
-    
-    //changing content padding for breakpoints
-    $map: (850:5%, 450:0);
-    @each $breakPoint,
-    $padd in $map {
-        @media all and (max-width: $breakPoint + px) {
-            section.content {
-                padding: 0 $padd 0 $padd
-            }
-        }
-    }
-    
-    @include heading($tan, .8, 2px, white, 200%);
-    p {
-        word-wrap: break-word;
-    }
-    
-    img {
-        max-height: 100%;
-        max-width: 100%;
-    }
-    
-    ////////////////////////END GENERAL/////////////////////////
-    ////////////////////////NAVIGATION/////////////////////////
-    #nav {
-        width: 100%;
-        position: absolute;
-        background-color: $brown;
+}
+
+@mixin heading($backgroundColor, $opacity, $borderSize, $color, $textSize) {
+    .heading {
         text-align: center;
-        z-index: 100;
-        top: 100%;
-        color: white;
-        box-shadow: 0 0 6px rgba($purple, 0.7);
-        #nav-accrd {
-            margin: 0 15%;
-            width: 70%;
-            padding: 0;
-            span {
-                width:100%;
-                &:hover {
-                    color: $purple;
-                }
-                cursor:pointer;
-                padding: 15px 10px;
-                display: inline-block;
-                &.active {
-                    transition: background-color 0.5s ease;
-                    background-color: rgba($purple, 0.6);
-                }
-            }
+        position: relative;
+        display: inline-block;
+        color: rgb(51, 68, 34);
+        text-transform: uppercase;
+        margin: 4% 0px 2%;
+        padding: 15px;
+        :before {
+            content: "";
+            position: absolute;
+            left: 25%;
+            top: 10%;
+            width: 50%;
+            border-top: 1px solid rgb(51, 68, 34);
         }
-        img {
+        h1 {
+            font-size: 150%;
+            font-weight: 600;
+            margin: 0px;
+        }
+        p {
+            font-size: $textSize*.5;
+            margin: 0;
+        }
+    }
+}
+
+///////////////////////////END MIXINS/////////////////////
+/////////////////////////////BUTTONS///////////////////////
+.button {
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    background-color: #ccc;
+    color: #222;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    transition: all .2s;
+}
+
+.button:hover {
+    background: #bbb;
+    transition: all .2s;
+}
+
+//dummy color data for test
+$colormap:( green:(background: #86c351, hover:#78b04a), blue:(background: #00b3e0, hover:#0097be), red:(background: #ff5817, hover:#da4912));
+@each $color,
+$map in $colormap {
+    .button.#{$color} {
+        background-color: map-get($map, 'background');
+    }
+    .button.#{$color}:hover {
+        background-color: map-get($map, 'hover');
+    }
+}
+
+/////////////////////////END BUTTONS//////////////////////
+//////////////////////////GENERAL/////////////////////////
+//color palette
+$purple: #332233;
+$brown: #886666;
+$blue: #DDEEEE;
+$tan: #DDBB99;
+html {
+    scroll-behavior: smooth;
+    font-family: sans-serif;
+    font-weight: 300;
+}
+
+body {
+    margin: 0;
+}
+
+h1 {
+    font-weight: 400;
+}
+
+h2,h3 {
+    font-weight: 300;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+p {
+    word-wrap: break-word;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.center {
+    @include center(true, true);
+}
+
+.center-vertical {
+    @include center(false, true);
+}
+
+.center-horizontal {
+    @include center(true, false);
+}
+
+
+section {
+    &.content {
+        padding: 0 10% 0 10%;
+    }
+}
+
+//changing content padding for breakpoints
+$map: (850:5%, 450:0);
+@each $breakPoint,
+$padd in $map {
+    @media all and (max-width: $breakPoint + px) {
+        section.content {
+            padding: 0 $padd 0 $padd
+        }
+    }
+}
+
+////////////////////////END GENERAL/////////////////////////
+////////////////////////NAVIGATION/////////////////////////
+#nav {
+    width: 100%;
+    position: absolute;
+    background-color: rgb(51, 68, 34);
+    text-align: center;
+    z-index: 100;
+    bottom: 0;
+    color: rgb(153, 161, 144);
+    box-shadow: rgba(51, 68, 34, 0.701961) 0px 0px 6px;
+    .col {
+        padding: 0;
+    }
+    #nav-accrd {
+        width: 80%;
+        padding: 0;
+        display:block;
+        span {
+            width: 100%;
             cursor: pointer;
-            display: none;
-            float: right;
-        }
-        @media all and (max-width:650px) {
-            #nav-accrd {
-                width: 100%;
-                margin: 0;
-                span {
-                    transform: none;
-                    width: 100%;
-                }
-                .col {
-                    padding: 0;
-                }
+            padding: 15px 10px;
+            display: inline-block;
+            &:hover {
+                color: white;
             }
-            .off {
-                display: none;
-            }
-            .on {
-                display: auto;
-            }
-            img {
-                display: block;
+            &.active-nav {
+                transition: background-color 0.5s ease;
+                background-color: rgba(0, 0, 0, 0.6);
             }
         }
     }
-    
-    //////////////////////END NAVIGATION///////////////////////
-    #home {
-        height: 100vh;
-        background: url(background.jpeg);
-        &:before {
-            content: '';
-            height: 100%;
-            background-color: white;
-            width: 100%;
-            opacity: 0.3;
-            position: absolute;
+    img {
+        cursor: pointer;
+        display: none;
+        float: right;
+        border: 1px solid white;
+        padding: 7px;
+        margin: 10px;
+    }
+    @media all and (max-width:850px) {
+        #nav-accrd {
+            margin: 0;
+            width:100%;
+            span {
+                width: 100%;
+            }
+            .col {
+                padding: 0;
+            }
+            
+            &.off {
+                .col{                   
+                    max-height: 0px;
+                    transition: max-height 0.25s ease-out;
+                    span{
+                        visibility:hidden;
+                        transition: visibility 0s linear 0.25s;
+                    }
+                }
+            }
+            &.on {
+                .col{
+                    //transition: 0.6s ease-in-out;
+                    max-height: 300px;
+                    transition: max-height .4s ease-in;
+                    span{
+                        visibility:auto;
+                    }
+                }
+                
+            }
         }
-        background-size: cover;
-        @media all {
-            display: flex;
-            align-items: center;
+        
+        img {
+            display: block;
         }
-        @include heading(#DDBB99, .8, 2px, white, 250%);
-        .down {
+    }
+}
+@include heading($tan, .8, 2px, white, 200%);
+//////////////////////END NAVIGATION///////////////////////
+///////////////////////HOME////////////////////////////
+#home {
+    height: 100vh;
+    background: url(images/background.jpeg);
+    background-size: cover;
+    &:before {
+        content: '';
+        height: 100%;
+        background-color: white;
+        width: 100%;
+        opacity: 0.3;
+        position: absolute;
+    }
+    @media all{
+        @keyframes bounce {
+            40%   {transform: translate(-50%, -50%);}
+            60%  {transform: translate(-50%, 0%);}
+            70%  {transform: translate(-50%, -15%);}
+            80%  {transform: translate(-50%, -25%);}
+            90%  {transform: translate(-50%, 0%);}
+        }
+        .bounce{
+            animation: bounce 2s ease-in-out infinite;
             position: absolute;
             left: 50%;
-            top: 100%;
+            bottom: 0%;
+            transform:translateX(-50%);
+            cursor:pointer;
+        }
+        
+        
+}
+    .heading{
+        text-align: center;
+        padding: 15px;
+        position: relative;
+        display: inline-block;
+        background-color: rgba(160, 108, 115, 0.6);
+        border: 2px solid white;
+        color: white;
+        text-transform: uppercase; 
+        :before{
+            content:none;
+        }
+        h1{
+            font-size:250%;
+            margin:0;
+        }
+        p{
+            font-size:100%;
+            margin:0;
         }
     }
-    
-    //////////////////////////EXPERIENCE///////////////////////   
+    @media all {
+        display: flex;
+        align-items: center;
+    }
+
+}
+
+///////////////////////////END HOME//////////////////////////
+///////////////////////////ABOUT////////////////////////////////
+#about {
+    margin-bottom: 5%;
+    img {
+        padding-top: 70px;
+    }
+    h2 {
+        text-align: center;
+        span {
+            border-bottom: solid 2px #DDBB33;
+        }
+    }
+}
+
+/////////////////////////END ABOUT////////////////////////////
+//////////////////////////EXPERIENCE///////////////////////   
+#experience {
+    background-color: rgba(153, 161, 144, 0.05);
     .jobs {
         &:before {
             content: '';
             height: 90%;
-            background: #00b3e0;
+            background: #99a190;
             position: absolute;
             left: 50%;
             width: 5px;
         }
         .job {
+            background-color: white;
+            border-top: solid 3px #DDBB33;
+            box-shadow: 0 0 6px rgba(221, 187, 153, 0.5);
             width: 50%;
+            p {
+                font-size: 12px;
+                line-height: 1.35em;
+            }
+            span {
+                font-size: 14px;
+            }
+            @media all {
+                h2 {
+                    display: inline-block;
+                    transition: transform 250ms ease-in-out;
+                    &:after {
+                        display: block;
+                        content: '';
+                        border-bottom: 1px solid #DDBB33;
+                        transform: scaleX(0);
+                        transition: transform 250ms ease-in-out;
+                    }
+                 
+                }
+            }
+            span {
+                display: block;
+                margin-top: 0;
+            }
+            &:hover h2:after {
+                transform: scaleX(1);
+            }
             & > * {
                 margin: 10px;
             }
@@ -289,14 +403,9 @@
                 clear: left;
                 margin-right: -15px;
             }
-            &:hover {
-                @media all {
-                    box-shadow: 2px 3px 10px grey, -2px -4px 7px grey;
-                    transition: .5s;
-                }
-            }
             &:before {
                 content: '⬢';
+                color: #334422;
                 position: absolute;
                 left: 50%;
                 margin-left: -5px;
@@ -304,7 +413,7 @@
         }
         @media all and (max-width: 850px) {
             &:before {
-                left: 0;
+                left: 10px;
             }
             .job {
                 width: 100%;
@@ -314,55 +423,246 @@
                     margin: 0 15px;
                 }
                 &:before {
-                    left: 0;
+                    left: 10px;
                 }
             }
         }
     }
-    
-    /////////////////////////////END EXPERIENCE/////////////////////
-    ///////////////////////////EDUCATION/////////////////////////////
+}
+
+/////////////////////////////END EXPERIENCE/////////////////////
+///////////////////////////EDUCATION/////////////////////////////
+#education {
+    background-color:white;
     .tabs {
+        position: relative;
+        :not(:last-child) .tab-button {
+            border-bottom: 4px solid white;
+        }
         @media all and (min-width: 850px) {
+            margin-left: 5%;
             .tab-button {
-                margin: 10px 0;
+                border-right: 4px solid white;
                 display: block;
                 width: 10%;
+                padding: 10px 0;
             }
             .tab-content {
                 position: absolute;
-                margin-left: 10%;
+                border: 2px solid #782E37;
+                margin-left: 13%;
                 top: 0;
                 width: 80%;
+                border-radius: 20px;
                 padding: 20px;
+                .col {
+                    padding: 0 10px;
+                }
             }
         }
-        .tab-button {
-            cursor: pointer;
-            text-align: center;
-            border: solid 1px black;
-            span {
-                font-size: 30px;
-                font-weight: 100;
-            }
-        }
-        .tab-content {
-            display: none;
-            &.active {
+        .tab {
+            .row {
                 display: block;
+                padding: 0;
+            }
+            .tab-button {
+                cursor: pointer;
+                text-align: center;
+                background-color: #a06c73;
+                padding: 30px 0;
+                &:hover {
+                    background-color: #782E37;
+                    transition: background-color 0.5s ease;
+                }
+            }
+            &.active-tab {
+                .tab-content {
+                    visibility: visible;
+                    opacity: 1;
+                    transition: visibility 0s linear 0s, opacity .5s;
+                }
+                .tab-button {
+                    background-color: #782E37;
+                }
+            }
+            .tab-content {
+                height:100%;
+                padding: 0;
+                opacity: 0;
+                /* property name | duration | timing function | delay */
+                transition: visibility 0s linear .5s, opacity .5s;
+                visibility: hidden;
+                .col {
+                    height: 90%;
+                    padding: 0;
+                    &:not(:last-child) {
+                        border-right: 1px solid #782E37;
+                    }
+                }
+                h2 {
+                    color: white;
+                    border-top-left-radius: 15px;
+                    border-top-right-radius: 15px;
+                    background-color: #782E37;
+                    margin: 0;
+                    padding: 10px;
+                    text-align: center;
+                }
+            }
+            .degree {
+                background-color: rgba(153, 161, 144, 0.5);
+                .col {
+                    padding: 0;
+                }
+                .tab-content {
+                    width: 100%;
+                }
+                table {
+                    border-collapse: collapse;
+                    h3 {
+                        margin: 0;
+                    }
+                    tr {
+                        border-bottom: 1px solid #99a190;
+                        &:last-child{
+                            border-bottom: none;
+                        }
+                    }
+                    td {
+                        padding: 10px 10px;
+                        &:first-child {
+                            width: 10%;
+                        }
+                        &:last-child {
+                            font-weight: 200;
+                            width: 50%;
+                           
+                        }
+                    }
+                }
+            }
+            .jobs li {
+                font-size: .9em;
+            }
+            .header-box {
+                .name {
+                    text-align: center;
+                    background-color: rgba(160, 108, 115, 0.4);
+                    color: #782E37;
+                    height: 15%;
+                    padding: 5px;
+                }
+                .info {
+                    p {
+                        margin: 0;
+                        padding: 10px;
+                    }
+                    ul {
+                        margin: 5px;
+                        li {
+                            padding: 10px 0;
+                        }
+                    }
+                }
+            }
+            @media all and (max-width: 850px) {
+                font-size:.8em;
+                .tab-button {
+                    border-radius: 0;
+                    border-bottom: 1px solid #782E37;
+                    padding:5px 0;
+                }
+                .row {
+                    display: inline-block;
+                }
+                .header-box {
+                    .name {
+                        text-align: left;
+                        background-color: white;
+                        color: #782E37;
+                        font-weight: 500;
+                        height: auto;
+                        p{
+                            margin:5px 0;
+                        }
+                    }
+                    .info {
+                        background-color: white;
+                        p{
+                            
+                            padding:5px;
+                        }
+                        ul{
+                            li{
+                                padding:0;
+                            }
+                        }
+                    }
+                }
+                .tab-content {
+                    border: 1px solid #782E37;
+                    height: auto;
+                    display: none;
+                    .col {
+                        height: auto;
+                    }
+                    h2 {
+                        color: #782E37;
+                        border-radius: 0;
+                        background-color: white;
+                        font-weight: 800;
+                        font-size:1em;
+                    }
+                }
+                &.active-tab .tab-content {
+                    display: block;
+                }
+                .degree {
+                    background-color: white;
+                }
             }
         }
     }
-    
-    //////////////////////////END EDUCATION//////////////////////////
-    ////////////////////////////CONTACT//////////////////////////////
-    #contact {
-        .col {
-            text-align: center;
-        }
-        span {
-            display: block;
+}
+
+//////////////////////////END EDUCATION//////////////////////////
+////////////////////////VOLUNTEERING////////////////////////
+.box {
+    box-shadow: 0 0 6px rgba(120, 46, 55, 0.5);
+    .box-header {
+        padding: 1px 0;
+        text-align: center;
+        background-color: #782E37;
+        color: white;
+    }
+    .box-content {
+        background-color: rgba(153, 161, 144, 0.05);
+        padding: 10px;
+    }
+}
+
+////////////////////////END VOLUNTEERING/////////////////////
+////////////////////////////CONTACT//////////////////////////////
+#contact {
+    color: white;
+    height: 70vh;
+    .row {
+        background-color: #782E37;
+        margin-top: 10%;
+    }
+    .col {
+        text-align: center;
+    }
+    span {
+        padding-top: 8px;
+        display: block;
+    }
+    .contact-img {
+        margin: 20% 0;
+        @media all and (max-width: 650px) {
+            margin: 5% 0;
         }
     }
-    
-    ///////////////////////////END CONTACT////////////////////////
+}
+
+///////////////////////////END CONTACT////////////////////////
