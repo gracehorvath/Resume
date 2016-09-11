@@ -205,7 +205,7 @@ $padd in $map {
     #nav-accrd {
         width: 80%;
         padding: 0;
-        display:block;
+        display:inline-block;
         span {
             width: 100%;
             cursor: pointer;
@@ -226,7 +226,7 @@ $padd in $map {
         float: right;
         border: 1px solid white;
         padding: 7px;
-        margin: 10px;
+        margin: 10px 10px 0 0;
     }
     @media all and (max-width:850px) {
         #nav-accrd {
@@ -234,10 +234,9 @@ $padd in $map {
             width:100%;
             span {
                 width: 100%;
+                padding:10px 0;
             }
-            .col {
-                padding: 0;
-            }
+            
             
             &.off {
                 .col{                   
@@ -363,11 +362,8 @@ $padd in $map {
             box-shadow: 0 0 6px rgba(221, 187, 153, 0.5);
             width: 50%;
             p {
-                font-size: 12px;
-                line-height: 1.35em;
-            }
-            span {
                 font-size: 14px;
+                line-height: 1.35em;
             }
             @media all {
                 h2 {
@@ -462,8 +458,13 @@ $padd in $map {
         }
         .tab {
             .row {
-                display: block;
                 padding: 0;
+                &:first-child{
+                    height:10%;
+                }
+                &:last-child{
+                    height:90%;
+                }
             }
             .tab-button {
                 cursor: pointer;
@@ -492,8 +493,12 @@ $padd in $map {
                 /* property name | duration | timing function | delay */
                 transition: visibility 0s linear .5s, opacity .5s;
                 visibility: hidden;
+                .header-box{
+                   // margin-top:20%;
+                    height:100%;
+                }
                 .col {
-                    height: 90%;
+                    height: 100%;
                     padding: 0;
                     &:not(:last-child) {
                         border-right: 1px solid #782E37;
@@ -550,7 +555,8 @@ $padd in $map {
                     background-color: rgba(160, 108, 115, 0.4);
                     color: #782E37;
                     height: 15%;
-                    padding: 5px;
+                    display: inline-block;
+                    width: 100%;
                 }
                 .info {
                     p {
