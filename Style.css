@@ -208,7 +208,7 @@ section.content {
   #nav #nav-accrd {
     width: 80%;
     padding: 0;
-    display: block; }
+    display: inline-block; }
     #nav #nav-accrd span {
       width: 100%;
       cursor: pointer;
@@ -225,15 +225,14 @@ section.content {
     float: right;
     border: 1px solid white;
     padding: 7px;
-    margin: 10px; }
+    margin: 10px 10px 0 0; }
   @media all and (max-width: 850px) {
     #nav #nav-accrd {
       margin: 0;
       width: 100%; }
       #nav #nav-accrd span {
-        width: 100%; }
-      #nav #nav-accrd .col {
-        padding: 0; }
+        width: 100%;
+        padding: 10px 0; }
       #nav #nav-accrd.off .col {
         max-height: 0px;
         transition: max-height 0.25s ease-out; }
@@ -347,10 +346,8 @@ section.content {
     box-shadow: 0 0 6px rgba(221, 187, 153, 0.5);
     width: 50%; }
     #experience .jobs .job p {
-      font-size: 12px;
+      font-size: 14px;
       line-height: 1.35em; }
-    #experience .jobs .job span {
-      font-size: 14px; }
     @media all {
       #experience .jobs .job h2 {
         display: inline-block;
@@ -418,8 +415,11 @@ section.content {
           #education .tabs .tab-content .col {
             padding: 0 10px; } }
     #education .tabs .tab .row {
-      display: block;
       padding: 0; }
+      #education .tabs .tab .row:first-child {
+        height: 10%; }
+      #education .tabs .tab .row:last-child {
+        height: 90%; }
     #education .tabs .tab .tab-button {
       cursor: pointer;
       text-align: center;
@@ -441,8 +441,10 @@ section.content {
       /* property name | duration | timing function | delay */
       transition: visibility 0s linear .5s, opacity .5s;
       visibility: hidden; }
+      #education .tabs .tab .tab-content .header-box {
+        height: 100%; }
       #education .tabs .tab .tab-content .col {
-        height: 90%;
+        height: 100%;
         padding: 0; }
         #education .tabs .tab .tab-content .col:not(:last-child) {
           border-right: 1px solid #782E37; }
@@ -461,7 +463,8 @@ section.content {
       #education .tabs .tab .degree .tab-content {
         width: 100%; }
       #education .tabs .tab .degree table {
-        border-collapse: collapse; }
+        border-collapse: collapse;
+        height: 100%; }
         #education .tabs .tab .degree table h3 {
           margin: 0; }
         #education .tabs .tab .degree table tr {
@@ -469,7 +472,7 @@ section.content {
           #education .tabs .tab .degree table tr:last-child {
             border-bottom: none; }
         #education .tabs .tab .degree table td {
-          padding: 10px 10px; }
+          padding: 0 20px; }
           #education .tabs .tab .degree table td:first-child {
             width: 10%; }
           #education .tabs .tab .degree table td:last-child {
@@ -482,7 +485,8 @@ section.content {
       background-color: rgba(160, 108, 115, 0.4);
       color: #782E37;
       height: 15%;
-      padding: 5px; }
+      display: inline-block;
+      width: 100%; }
     #education .tabs .tab .header-box .info p {
       margin: 0;
       padding: 10px; }
@@ -531,7 +535,9 @@ section.content {
           background-color: white; } }
 
 .box {
-  box-shadow: 0 0 6px rgba(120, 46, 55, 0.5); }
+  margin-top: 30px;
+  box-shadow: 0 0 6px rgba(120, 46, 55, 0.5);
+  opacity: 0; }
   .box .box-header {
     padding: 1px 0;
     text-align: center;
@@ -540,6 +546,16 @@ section.content {
   .box .box-content {
     background-color: rgba(153, 161, 144, 0.05);
     padding: 10px; }
+  @media all {
+    .box.slideUp {
+      animation: slideUp .5s ease-in 1;
+      animation-fill-mode: forwards; }
+    @keyframes slideUp {
+      60% {
+        opacity: .4; }
+      100% {
+        margin-top: 0;
+        opacity: 1; } } }
 
 #contact {
   color: white;

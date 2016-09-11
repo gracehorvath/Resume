@@ -1,6 +1,11 @@
 var secOffSet = {};
+var iOS = navigator.userAgent.match(/(iPhone|iPad)/);
+var animation = true;
 document.addEventListener("DOMContentLoaded", function (event) {
     setNavOffSets();
+    if(iOS){
+        document.getElementById('home').style.height=window.innerHeight+'px';
+    }
 });
 window.onresize = function (event) {
     setNavOffSets();
@@ -12,6 +17,9 @@ window.onscroll = function () {
 
     stickyNav(nav, windowOffSet);
     activeNavLink(nav, windowOffSet);
+    if(animation){
+        animations(nav, windowOffSet);
+    }
 };
 
 function setNavOffSets() {
@@ -56,14 +64,14 @@ function activeNavLink(nav, windowOffSet) {
 var scrollTimer;
 
 function scroll(secSpan) {
-
+    
     var secNameEle = secSpan.parentElement;
     
     var secName = (secNameEle.classList.length>1) ? secNameEle.classList[1] : secNameEle.classList[0];
     var sec = document.getElementById(secName);
-    console.log(sec);
     var increment;
-    var navHeight = document.getElementById("nav").offsetHeight;
+    var navHeight = document.getElementById("nav").offsetHeight - document.getElementById("nav-accrd").offsetHeight;
+    console.log(document.getElementById("nav-accrd").offsetHeight);
 
     if (sec.offsetTop - window.scrollY >= 0) { //scrolling down
         increment = (sec.offsetTop - window.scrollY) / 70; //distance to scroll / arbitrary #
@@ -73,14 +81,17 @@ function scroll(secSpan) {
     scrollTimer = setInterval(function () {
         scrolling(sec, increment, navHeight);
     }, 1);
+    secNameEle.parentElement.className = secNameEle.parentElement.className.replace("on", "off");
 
 }
 
 function scrolling(sec, increment, navHeight) {
-    var windowY = window.scrollY;
-    window.scrollTo(sec.offsetLeft, windowY + increment);
-    if ((window.scrollY + window.innerHeight == document.body.offsetHeight) || (window.scrollY == 0) || (increment > 0 && windowY >= (sec.offsetTop)) || (increment < 0 && windowY <= (sec.offsetTop))) {
+    var windowY = window.scrollY +increment;
+    if ((window.scrollY + window.innerHeight == document.body.offsetHeight) || (windowY == 0) || (increment > 0 && windowY >= (sec.offsetTop-navHeight)) || (increment < 0 && windowY <= (sec.offsetTop))) {
+        window.scrollTo(sec.offsetLeft, sec.offsetTop-navHeight)
         window.clearInterval(scrollTimer)
+    }else{
+        window.scrollTo(sec.offsetLeft, windowY + increment);
     }
 }
 
@@ -100,4 +111,18 @@ function displayTab(tabButton) {
         active[0].className = "tab disabled-tab";
     }
     tab.className = "tab active-tab";
+}
+
+function animations(nav,windowOffSet){
+    var volunteer = document.getElementById('volunteer');
+    if(windowOffSet >= volunteer.offsetTop - volunteer.offsetHeight){
+        var boxes = document.getElementsByClassName('box');
+        for(var x=0; x<boxes.length; x++){
+            var boxClass= boxes[x].className;
+            if(boxClass.indexOf('slideUp')<0){
+                boxes[x].className+=" slideUp";
+                animation=false;
+            }
+        }
+    }
 }

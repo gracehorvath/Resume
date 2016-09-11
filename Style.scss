@@ -524,6 +524,7 @@ $padd in $map {
                 }
                 table {
                     border-collapse: collapse;
+                    height:100%;
                     h3 {
                         margin: 0;
                     }
@@ -534,7 +535,7 @@ $padd in $map {
                         }
                     }
                     td {
-                        padding: 10px 10px;
+                        padding: 0 20px;
                         &:first-child {
                             width: 10%;
                         }
@@ -634,7 +635,9 @@ $padd in $map {
 //////////////////////////END EDUCATION//////////////////////////
 ////////////////////////VOLUNTEERING////////////////////////
 .box {
+    margin-top:30px;
     box-shadow: 0 0 6px rgba(120, 46, 55, 0.5);
+    opacity:0;
     .box-header {
         padding: 1px 0;
         text-align: center;
@@ -644,6 +647,16 @@ $padd in $map {
     .box-content {
         background-color: rgba(153, 161, 144, 0.05);
         padding: 10px;
+    }
+    @media all{
+        &.slideUp{
+            animation: slideUp .5s ease-in 1;
+            animation-fill-mode: forwards;  
+        }
+        @keyframes slideUp{
+            60%{opacity:.4;}
+            100% {margin-top:0; opacity:1;}
+        }
     }
 }
 
