@@ -1,3 +1,17 @@
+$dark-teal: #022629;//#002B1F;
+$light-teal: #99a8a9;//#BDD5D1;
+$teal: #4d6769;//#7FADA5;
+$green: #2A5945;
+$rose: #A06C73;
+$purple1: #5C2D4D;
+$purple2:#332233;
+$gray-purple: #886666;
+$tan: #E5DCC0;
+$dark-tan: #cec6ac;
+$orange: #7c2613;//#6a2110;//#B2371C;
+$egg-shell: #FAFFED;
+$gray: #CED6D8;
+$light-green:#7f9b8f;
 ///////////////////////GRID SETUP///////////////////////
 //full page col width
 @for $i from 1 through 12 {
@@ -58,34 +72,6 @@ $cols in $map {
     }
 }
 
-@mixin heading($backgroundColor, $opacity, $borderSize, $color, $textSize) {
-    .heading {
-        text-align: center;
-        position: relative;
-        display: inline-block;
-        color: rgb(51, 68, 34);
-        text-transform: uppercase;
-        margin: 4% 0px 2%;
-        padding: 15px;
-        :before {
-            content: "";
-            position: absolute;
-            left: 25%;
-            top: 10%;
-            width: 50%;
-            border-top: 1px solid rgb(51, 68, 34);
-        }
-        h1 {
-            font-size: 150%;
-            font-weight: 600;
-            margin: 0px;
-        }
-        p {
-            font-size: $textSize*.5;
-            margin: 0;
-        }
-    }
-}
 
 ///////////////////////////END MIXINS/////////////////////
 /////////////////////////////BUTTONS///////////////////////
@@ -93,7 +79,7 @@ $cols in $map {
     cursor: pointer;
     display: inline-block;
     text-decoration: none;
-    background-color: #ccc;
+    background-color: $light-green;
     color: #222;
     padding: 10px 15px;
     border: none;
@@ -102,7 +88,7 @@ $cols in $map {
 }
 
 .button:hover {
-    background: #bbb;
+    background: $green;
     transition: all .2s;
 }
 
@@ -121,10 +107,6 @@ $map in $colormap {
 /////////////////////////END BUTTONS//////////////////////
 //////////////////////////GENERAL/////////////////////////
 //color palette
-$purple: #332233;
-$brown: #886666;
-$blue: #DDEEEE;
-$tan: #DDBB99;
 html {
     scroll-behavior: smooth;
     font-family: sans-serif;
@@ -170,6 +152,32 @@ img {
     @include center(true, false);
 }
 
+.heading {
+        text-align: center;
+        position: relative;
+        display: inline-block;
+        color: $dark-teal;
+        text-transform: uppercase;
+        margin: 4% 0px 2%;
+        padding: 15px;
+        :before {
+            content: "";
+            position: absolute;
+            left: 25%;
+            top: 10%;
+            width: 50%;
+            border-top: 1px solid rgb(51, 68, 34);
+        }
+        h1 {
+            font-size: 150%;
+            font-weight: 600;
+            margin: 0px;
+        }
+        p {
+            font-size: 100%;
+            margin: 0;
+        }
+    }
 
 section {
     &.content {
@@ -193,11 +201,11 @@ $padd in $map {
 #nav {
     width: 100%;
     position: absolute;
-    background-color: rgb(51, 68, 34);
+    background-color: $dark-teal;
     text-align: center;
     z-index: 100;
     bottom: 0;
-    color: rgb(153, 161, 144);
+    color: $light-teal;
     box-shadow: rgba(51, 68, 34, 0.701961) 0px 0px 6px;
     .col {
         padding: 0;
@@ -205,7 +213,7 @@ $padd in $map {
     #nav-accrd {
         width: 80%;
         padding: 0;
-        display:inline-block;
+        display:block;
         span {
             width: 100%;
             cursor: pointer;
@@ -216,7 +224,8 @@ $padd in $map {
             }
             &.active-nav {
                 transition: background-color 0.5s ease;
-                background-color: rgba(0, 0, 0, 0.6);
+                background-color: rgba($light-teal,.6);
+                color: $dark-teal;
             }
         }
     }
@@ -226,7 +235,7 @@ $padd in $map {
         float: right;
         border: 1px solid white;
         padding: 7px;
-        margin: 10px 10px 0 0;
+        margin: 7px;
     }
     @media all and (max-width:850px) {
         #nav-accrd {
@@ -266,7 +275,7 @@ $padd in $map {
         }
     }
 }
-@include heading($tan, .8, 2px, white, 200%);
+//@include heading($dark-teal, .8, 2px, white, 200%);
 //////////////////////END NAVIGATION///////////////////////
 ///////////////////////HOME////////////////////////////
 #home {
@@ -305,7 +314,7 @@ $padd in $map {
         padding: 15px;
         position: relative;
         display: inline-block;
-        background-color: rgba(160, 108, 115, 0.6);
+        background-color: rgba($orange,.5);
         border: 2px solid white;
         color: white;
         text-transform: uppercase; 
@@ -338,7 +347,7 @@ $padd in $map {
     h2 {
         text-align: center;
         span {
-            border-bottom: solid 2px #DDBB33;
+            border-bottom: solid 2px $orange;
         }
     }
 }
@@ -346,19 +355,19 @@ $padd in $map {
 /////////////////////////END ABOUT////////////////////////////
 //////////////////////////EXPERIENCE///////////////////////   
 #experience {
-    background-color: rgba(153, 161, 144, 0.05);
+    background-color:rgba($gray,.1);
     .jobs {
         &:before {
             content: '';
             height: 90%;
-            background: #99a190;
+            background: $light-teal;
             position: absolute;
             left: 50%;
             width: 5px;
         }
         .job {
             background-color: white;
-            border-top: solid 3px #DDBB33;
+            border-top: solid 3px $orange;
             box-shadow: 0 0 6px rgba(221, 187, 153, 0.5);
             width: 50%;
             p {
@@ -372,7 +381,7 @@ $padd in $map {
                     &:after {
                         display: block;
                         content: '';
-                        border-bottom: 1px solid #DDBB33;
+                        border-bottom: 1px solid $orange;
                         transform: scaleX(0);
                         transition: transform 250ms ease-in-out;
                     }
@@ -401,7 +410,7 @@ $padd in $map {
             }
             &:before {
                 content: '⬢';
-                color: #334422;
+                color: $dark-teal;
                 position: absolute;
                 left: 50%;
                 margin-left: -5px;
@@ -445,7 +454,7 @@ $padd in $map {
             }
             .tab-content {
                 position: absolute;
-                border: 2px solid #782E37;
+                border: 2px solid $green;
                 margin-left: 13%;
                 top: 0;
                 width: 80%;
@@ -469,10 +478,10 @@ $padd in $map {
             .tab-button {
                 cursor: pointer;
                 text-align: center;
-                background-color: #a06c73;
+                background-color: $light-green;
                 padding: 30px 0;
                 &:hover {
-                    background-color: #782E37;
+                    background-color: $green;
                     transition: background-color 0.5s ease;
                 }
             }
@@ -483,7 +492,7 @@ $padd in $map {
                     transition: visibility 0s linear 0s, opacity .5s;
                 }
                 .tab-button {
-                    background-color: #782E37;
+                    background-color: $green;
                 }
             }
             .tab-content {
@@ -494,28 +503,26 @@ $padd in $map {
                 transition: visibility 0s linear .5s, opacity .5s;
                 visibility: hidden;
                 .header-box{
-                   // margin-top:20%;
                     height:100%;
                 }
                 .col {
                     height: 100%;
                     padding: 0;
                     &:not(:last-child) {
-                        border-right: 1px solid #782E37;
+                        border-right: 1px solid $green;
                     }
                 }
                 h2 {
                     color: white;
                     border-top-left-radius: 15px;
                     border-top-right-radius: 15px;
-                    background-color: #782E37;
+                    background-color: $green;
                     margin: 0;
                     padding: 10px;
                     text-align: center;
                 }
             }
             .degree {
-                background-color: rgba(153, 161, 144, 0.5);
                 .col {
                     padding: 0;
                 }
@@ -553,8 +560,8 @@ $padd in $map {
             .header-box {
                 .name {
                     text-align: center;
-                    background-color: rgba(160, 108, 115, 0.4);
-                    color: #782E37;
+                    background-color: rgba($light-green, 0.4);
+                    color: $green;
                     height: 15%;
                     display: inline-block;
                     width: 100%;
@@ -576,7 +583,7 @@ $padd in $map {
                 font-size:.8em;
                 .tab-button {
                     border-radius: 0;
-                    border-bottom: 1px solid #782E37;
+                    border-bottom: 1px solid $green;
                     padding:5px 0;
                 }
                 .row {
@@ -586,7 +593,7 @@ $padd in $map {
                     .name {
                         text-align: left;
                         background-color: white;
-                        color: #782E37;
+                        color: $green;
                         font-weight: 500;
                         height: auto;
                         p{
@@ -607,14 +614,14 @@ $padd in $map {
                     }
                 }
                 .tab-content {
-                    border: 1px solid #782E37;
+                    border: 1px solid $green;
                     height: auto;
                     display: none;
                     .col {
                         height: auto;
                     }
                     h2 {
-                        color: #782E37;
+                        color: $green;
                         border-radius: 0;
                         background-color: white;
                         font-weight: 800;
@@ -634,18 +641,19 @@ $padd in $map {
 
 //////////////////////////END EDUCATION//////////////////////////
 ////////////////////////VOLUNTEERING////////////////////////
-.box {
+#volunteer{
+    background-color: rgba($gray, .1);
+    .box {
     margin-top:30px;
     box-shadow: 0 0 6px rgba(120, 46, 55, 0.5);
     opacity:0;
     .box-header {
         padding: 1px 0;
         text-align: center;
-        background-color: #782E37;
+        background-color: $orange;
         color: white;
     }
     .box-content {
-        background-color: rgba(153, 161, 144, 0.05);
         padding: 10px;
     }
     @media all{
@@ -659,6 +667,7 @@ $padd in $map {
         }
     }
 }
+}
 
 ////////////////////////END VOLUNTEERING/////////////////////
 ////////////////////////////CONTACT//////////////////////////////
@@ -666,7 +675,7 @@ $padd in $map {
     color: white;
     height: 70vh;
     .row {
-        background-color: #782E37;
+        background-color: $dark-teal;
         margin-top: 10%;
     }
     .col {
