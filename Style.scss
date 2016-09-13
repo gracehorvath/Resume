@@ -80,7 +80,7 @@ $cols in $map {
     display: inline-block;
     text-decoration: none;
     background-color: $light-green;
-    color: #222;
+   
     padding: 10px 15px;
     border: none;
     border-radius: 3px;
@@ -166,7 +166,7 @@ img {
             left: 25%;
             top: 10%;
             width: 50%;
-            border-top: 1px solid rgb(51, 68, 34);
+            border-top: 1px solid $teal;
         }
         h1 {
             font-size: 150%;
@@ -206,7 +206,7 @@ $padd in $map {
     z-index: 100;
     bottom: 0;
     color: $light-teal;
-    box-shadow: rgba(51, 68, 34, 0.701961) 0px 0px 6px;
+    box-shadow: $teal 0px 0px 7px;
     .col {
         padding: 0;
     }
@@ -368,7 +368,7 @@ $padd in $map {
         .job {
             background-color: white;
             border-top: solid 3px $orange;
-            box-shadow: 0 0 6px rgba(221, 187, 153, 0.5);
+            box-shadow: 0 0 6px rgba($orange, 0.5);
             width: 50%;
             p {
                 font-size: 14px;
@@ -536,7 +536,7 @@ $padd in $map {
                         margin: 0;
                     }
                     tr {
-                        border-bottom: 1px solid #99a190;
+                        border-bottom: 1px solid $light-green;
                         &:last-child{
                             border-bottom: none;
                         }
@@ -645,7 +645,7 @@ $padd in $map {
     background-color: rgba($gray, .1);
     .box {
     margin-top:30px;
-    box-shadow: 0 0 6px rgba(120, 46, 55, 0.5);
+    box-shadow: 0 0 6px rgba($orange, 0.5);
     opacity:0;
     .box-header {
         padding: 1px 0;

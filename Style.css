@@ -115,7 +115,6 @@
   display: inline-block;
   text-decoration: none;
   background-color: #7f9b8f;
-  color: #222;
   padding: 10px 15px;
   border: none;
   border-radius: 3px;
@@ -199,7 +198,7 @@ img {
     left: 25%;
     top: 10%;
     width: 50%;
-    border-top: 1px solid #334422; }
+    border-top: 1px solid #4d6769; }
   .heading h1 {
     font-size: 150%;
     font-weight: 600;
@@ -225,7 +224,7 @@ section.content {
   z-index: 100;
   bottom: 0;
   color: #99a8a9;
-  box-shadow: rgba(51, 68, 34, 0.70196) 0px 0px 6px; }
+  box-shadow: #4d6769 0px 0px 7px; }
   #nav .col {
     padding: 0; }
   #nav #nav-accrd {
@@ -344,7 +343,7 @@ section.content {
   #experience .jobs .job {
     background-color: white;
     border-top: solid 3px #7c2613;
-    box-shadow: 0 0 6px rgba(221, 187, 153, 0.5);
+    box-shadow: 0 0 6px rgba(124, 38, 19, 0.5);
     width: 50%; }
     #experience .jobs .job p {
       font-size: 14px;
@@ -467,7 +466,7 @@ section.content {
       #education .tabs .tab .degree table h3 {
         margin: 0; }
       #education .tabs .tab .degree table tr {
-        border-bottom: 1px solid #99a190; }
+        border-bottom: 1px solid #7f9b8f; }
         #education .tabs .tab .degree table tr:last-child {
           border-bottom: none; }
       #education .tabs .tab .degree table td {
@@ -537,7 +536,7 @@ section.content {
   background-color: rgba(206, 214, 216, 0.1); }
   #volunteer .box {
     margin-top: 30px;
-    box-shadow: 0 0 6px rgba(120, 46, 55, 0.5);
+    box-shadow: 0 0 6px rgba(124, 38, 19, 0.5);
     opacity: 0; }
     #volunteer .box .box-header {
       padding: 1px 0;
